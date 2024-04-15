@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visos Užduotys</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        .table {
+            background-color: #fff;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .btn-primary, .btn-danger {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4 text-center">Visos Užduotys</h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Pavadinimas</th>
+                    <th scope="col">Aprašymas</th>
+                    <th scope="col">Būsena</th>
+                    <th scope="col">Vartotojas</th>
+                    <th scope="col">Veiksmai</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task[1] }}</td>
+                        <td>{{ task[2] }}</td>
+                        <td>{{ task[3] }}</td>
+                        <td>{{ task[4] }}</td>
+                        <td>
+                            <a href="/edit_task/{{ task[0] }}" class="btn btn-primary btn-sm">Redaguoti</a>
+                            <a href="/delete_task/{{ task[0] }}" class="btn btn-danger btn-sm">Ištrinti</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

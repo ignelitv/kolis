@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redaguoti Užduotį</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-control {
+            border-radius: 8px;
+            border-color: #ced4da;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4 text-center mb-4">Redaguoti Užduotį</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/edit_task/{{ task[0] }}" method="post">
+                    <div class="form-group">
+                        <label for="title">Pavadinimas:</label>
+                        <input type="text" class="form-control" id="title" name="title" value="{{ task[1] }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Aprašymas:</label>
+                        <input type="text" class="form-control" id="description" name="description" value="{{ task[2] }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Būsena:</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="Atlikta" {% if task[3] == 'Atlikta' %} selected {% endif %}>Atlikta</option>
+                            <option value="Neatlikta" {% if task[3] == 'Neatlikta' %} selected {% endif %}>Neatlikta</option>
+                            <option value="Nukelta" {% if task[3] == 'Nukelta' %} selected {% endif %}>Nukelta</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="user">Vartotojas:</label>
+                        <input type="text" class="form-control" id="user" name="user" value="{{ task[4] }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Išsaugoti Pakeitimus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
